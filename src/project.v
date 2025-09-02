@@ -21,10 +21,6 @@ module tt_um_uwasic_onboarding_yohann (
   assign uio_out = 0;
   assign uio_oe  = 0;
 
-  // List all unused inputs to prevent warnings
-  wire _unused = &{ena, clk, rst_n, 1'b0};
-
-
   // Add this inside the module block
   assign uio_oe = 8'hFF; // Set all IOs to output
   
