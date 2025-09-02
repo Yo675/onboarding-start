@@ -19,7 +19,6 @@ module tt_um_uwasic_onboarding_yohann (
   // All output pins must be assigned. If not used, assign to 0.
   assign uo_out  = ui_in + uio_in;  // Example: ou_out is the sum of ui_in and uio_in
   assign uio_out = 0;
-  assign uio_oe  = 0;
 
   // Add this inside the module block
   assign uio_oe = 8'hFF; // Set all IOs to output
@@ -30,6 +29,14 @@ module tt_um_uwasic_onboarding_yohann (
   wire [7:0] en_reg_pwm_7_0;
   wire [7:0] en_reg_pwm_15_8;
   wire [7:0] pwm_duty_cycle;
+
+    // To remove warnings
+  assign en_reg_out_7_0   = 8'h00;
+  assign en_reg_out_15_8  = 8'h00;
+  assign en_reg_pwm_7_0   = 8'h00;
+  assign en_reg_pwm_15_8  = 8'h00;
+  assign pwm_duty_cycle   = 8'hFF;
+
 
   // Instantiate the PWM module
   pwm_peripheral pwm_peripheral_inst (
