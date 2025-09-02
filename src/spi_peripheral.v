@@ -11,6 +11,10 @@ module spi_peripheral (
 
     logic [7:0] regs [0:MAX_ADDR-1]; //5 registers, 8 bits ea
 
+    logic rw;
+    logic [6:0] addr;
+    logic [7:0] data;
+
     logic [15:0] shift_reg; //Holds incoming bits
     logic [3:0]  bit_cnt; //bits received count (2^4 = 16 max)
 
@@ -71,9 +75,9 @@ module spi_peripheral (
 
             // On end of transaction
             if (nCS_rise && (bit_cnt == 16)) begin
-                logic [0] rw = shift_reg[15]; // RW bit
-                logic [6:0] addr = shift_reg[14:8]; //Take the address
-                logic [7:0] data = shift_reg[7:0]; //Take the data
+                rw = shift_reg[15]; // RW bit
+                addr = shift_reg[14:8]; //Take the address
+                data = shift_reg[7:0]; //Take the data
 
                 if (addr < MAX_ADDR) begin //If address is valid, write in corresponding register
                     regs[addr] <= data;
